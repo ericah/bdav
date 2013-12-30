@@ -1,0 +1,18 @@
+CREATE OR REPLACE FUNCTION creer_iban(bnq Banque.Id_banque, agence Agence.Id_Agence, nb_compte Compte.NbCompte) RETURNS varchar(27) AS $$
+DECLARE
+    varchar(27) iban;
+BEGIN
+
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+CREATE OR REPLACE FUNCTION creer_compte(agence Agence.Id_Agence, personne Personne.Nb_Doc_Id, type_compte Type_compte.Code) RETURNS BOOLEAN AS $$
+DECLARE
+
+BEGIN
+
+END;
+$$ LANGUAGE plpgsql;
