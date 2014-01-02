@@ -34,7 +34,7 @@ ALTER TABLE Agence ADD CONSTRAINT FKAgence FOREIGN KEY (BanqueId_banque) REFEREN
  
 CREATE TABLE Type_carte (
   Id_Type        SERIAL NOT NULL, 
-  Type          varchar(10) NOT NULL, 
+  Nom_Type          varchar(10) NOT NULL, 
   International int4, 
   Mensualite    int4, 
   PRIMARY KEY (Id_Type));
@@ -50,19 +50,19 @@ CREATE TABLE Personne (
   Nom            varchar(30) NOT NULL, 
   Prenom         varchar(30) NOT NULL, 
   Date_Naissance date NOT NULL, 
-  Etat_civil     char(30) NOT NULL, 
+  Etat_civil     char(10) NOT NULL, 
   PRIMARY KEY (Id_Perso));
 
 CREATE TABLE Type_compte (
   Code            SERIAL NOT NULL, 
-  nb_personnes   int4 NOT NULL, 
+  nb_personnes   int4 NOT NULL,    
   Et_ou_OU       int4,
   nom_type      varchar(10) NOT NULL,
   PRIMARY KEY (Code));
 
 
 CREATE TABLE Compte (
-  NbCompte        varchar(10) NOT NULL, 
+  NbCompte        varchar(11) NOT NULL, 
   Solde           int4, 
   Decouvert_Aut   int4, 
   ID_titulaire    int4, 
@@ -74,7 +74,7 @@ CREATE TABLE Compte (
 
 ALTER TABLE Compte ADD CONSTRAINT FKCompte FOREIGN KEY (Id_Agence) REFERENCES Agence (Id_Agence);
 ALTER TABLE Compte ADD CONSTRAINT FKCompte_perso FOREIGN KEY (ID_titulaire) REFERENCES Personne (Id_Perso);
-ALTER TABLE Compte ADD CONSTRAINT FKType_compte FOREIGN KEY (Type_compte) REFERENCES  Type_compte (Type_compte);
+ALTER TABLE Compte ADD CONSTRAINT FKType_compte FOREIGN KEY (Type_compte) REFERENCES  Type_compte (Code);
 
 
 CREATE TABLE Carte_Bancaire (
@@ -85,7 +85,7 @@ CREATE TABLE Carte_Bancaire (
   RPC               char(1) NOT NULL, 
   Plafond           int4 NOT NULL, 
   Type_carte	     int4 NOT NULL, 
-  NbCompte    varchar(10) NOT NULL, 
+  NbCompte    varchar(11) NOT NULL, 
   PRIMARY KEY (Numero_Carte));
 
 
@@ -98,7 +98,7 @@ ALTER TABLE Carte_Bancaire ADD CONSTRAINT FKCarte_Bank_compte FOREIGN KEY (NbCom
 
 CREATE TABLE Cheque (
   ID_cheque       SERIAL NOT NULL, 
-  NbCompte varchar(10) NOT NULL, 
+  NbCompte varchar(11) NOT NULL, 
   PRIMARY KEY (ID_cheque));
 
 
