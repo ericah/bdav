@@ -9,7 +9,7 @@ BEGIN
 			compte.nbcompte),
 		compte.cle_rib)
 	INTO iban
-	FROM banque NATURAL JOIN (agence JOIN compte)) 
+	FROM banque NATURAL JOIN agence NATURAL JOIN compte 
 	WHERE compte.nbcompte = num_compte;
 	RETURN iban;
 END;
