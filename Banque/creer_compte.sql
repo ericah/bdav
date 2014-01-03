@@ -14,12 +14,11 @@ BEGIN
 	RETURN iban;
 END;
 $$ LANGUAGE plpgsql;
-/*
-CREATE OR REPLACE FUNCTION creer_compte(agence agence.id_agence, personne personne.nb_doc_id, type_compte type_compte.code) RETURNS BOOLEAN AS $$
+
+CREATE OR REPLACE FUNCTION creer_compte(type_cpt integer, solde integer, deccouvert integer, titulaire integer, agence integer) RETURNS BOOLEAN AS $$
 DECLARE
 
 BEGIN
 
 END;
 $$ LANGUAGE plpgsql;
-*/

@@ -1,3 +1,11 @@
+DROP TABLE Type_compte;
+DROP TABLE Cheque;
+DROP TABLE Carte_Bancaire;
+DROP TABLE Personne;
+DROP TABLE Compte;
+DROP TABLE Agence;
+DROP TABLE Banque;
+DROP TABLE Type_carte;
 
 CREATE TABLE Type_carte (
   Id_Type        SERIAL NOT NULL, 
@@ -5,7 +13,6 @@ CREATE TABLE Type_carte (
   International int4, 
   Mensualite    int4, 
   PRIMARY KEY (Id_Type));
-
 
 CREATE TABLE Carte_Bancaire (
   Numero_Carte      varchar(16) NOT NULL, 
@@ -19,7 +26,7 @@ CREATE TABLE Carte_Bancaire (
   PRIMARY KEY (Numero_Carte));
 
 CREATE TABLE Compte (
-  NbCompte        varchar(10) NOT NULL, 
+  NbCompte        varchar(11) NOT NULL, 
   Solde           int4, 
   Decouvert_Aut   int4, 
   ID_titulaire    int4, 
@@ -47,7 +54,7 @@ CREATE TABLE Personne (
   Prenom         varchar(30) NOT NULL, 
   Date_Naissance date NOT NULL, 
   Etat_civil     char(30) NOT NULL, 
-  CompteNbCompte varchar(10) NOT NULL, 
+  CompteNbCompte varchar(11) NOT NULL, 
   PRIMARY KEY (Nb_Doc_Id));
 
 CREATE TABLE Carte_Bancaire (
@@ -58,12 +65,12 @@ CREATE TABLE Carte_Bancaire (
   RPC               char(1) NOT NULL, 
   Plafond           int4 NOT NULL, 
   Type_carteId_Type int4 NOT NULL, 
-  CompteNbCompte    varchar(10) NOT NULL, 
+  CompteNbCompte    varchar(11) NOT NULL, 
   PRIMARY KEY (Numero_Carte));
 
 CREATE TABLE Cheque (
   ID_cheque       SERIAL NOT NULL, 
-  CompteNbCompte varchar(10) NOT NULL, 
+  CompteNbCompte varchar(11) NOT NULL, 
   PRIMARY KEY (ID_cheque));
 
 CREATE TABLE Type_compte (
