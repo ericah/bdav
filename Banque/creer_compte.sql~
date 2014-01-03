@@ -36,7 +36,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION creer_iban(c varchar(11), b banque.id_banque%TYPE, a agence.id_agence%TYPE) RETURNS varchar(27) AS $$
+CREATE OR REPLACE FUNCTION creer_iban(b banque.id_banque%TYPE, a agence.id_agence%TYPE) RETURNS varchar(27) AS $$
 DECLARE
 	iban varchar(27);
 	nbcompte varchar(11);
@@ -49,16 +49,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION creer_compte(typec type_compte.code%TYPE, d compte.Decouvert_Aut%TYPE, p personne.id_perso%TYPE, a agence.id_agence%TYPE, b banque.id_banque%TYPE) RETURNS BOOLEAN AS $$
+CREATE OR REPLACE FUNCTION creer_compte(typec type_compte.code%TYPE, d compte.decouvert_aut%TYPE, p personne.id_perso%TYPE, a agence.id_agence%TYPE, b banque.id_banque%TYPE) RETURNS BOOLEAN AS $$
 DECLARE
 	iban varchar(27);
-	nbcompte varchar(11);
 BEGIN
-
-	SELECT creer_num_compte() INTO nbcompte;
-	SELECT creer_iban(nbcompte, b,a) INTO iban;
-
-	INSERT INTO compte VALUES (default, nbcompte,0,d, p, typec, iban, a, false, 0);
+	SELECT creer_iban(b,a) INTO iban;
+	INSERT INTO compte VALUES (0, decouvert, p, typec, iban, a, false);
 	RETURN true;
 END;
 $$ LANGUAGE plpgsql;
