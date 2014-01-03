@@ -1,3 +1,40 @@
+CREATE OR REPLACE FUNCTION creer_num_compte() RETURNS varchar(11) AS $$
+DECLARE
+	entete varchar(10);
+	serie integer;
+	resultat varchar(11);
+BEGIN
+	SELECT  CAST(valeur AS varchar(10))
+	INTO entete
+	FROM parametres 
+	WHERE nom_para = 'entetecompte';
+--	RETURN entete;
+
+	
+
+	SELECT   max(id_Compte)
+	INTO serie
+	FROM compte;
+	--RETURN serie;
+
+
+	IF serie is NULL OR serie=0 THEN
+	   serie:=0;
+	END IF;
+	
+	serie := serie +1;
+	
+	resultat := entete || serie;
+
+	
+	RETURN resultat;
+	
+END;
+
+
+$$ LANGUAGE plpgsql;
+
+
 CREATE OR REPLACE FUNCTION creer_iban(num_compte varchar(11)) RETURNS varchar(27) AS $$
 DECLARE
 	iban varchar(27);
