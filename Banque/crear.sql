@@ -1,6 +1,5 @@
 \connect postgres
 
-
 DROP DATABASE "BDAV";
 
 CREATE DATABASE "BDAV"
@@ -8,12 +7,7 @@ CREATE DATABASE "BDAV"
        ENCODING = 'UTF8'
        TABLESPACE = pg_default;
 
-
 \connect BDAV
-
-
-
-
 
 CREATE TABLE Banque (
   Id_banque   SERIAL NOT NULL, 
@@ -39,11 +33,6 @@ CREATE TABLE Type_carte (
   Mensualite    int4, 
   PRIMARY KEY (Id_Type));
 
-
-
-
-
-
 CREATE TABLE Personne (
   Id_Perso        SERIAL NOT NULL,
   Num_Doc       varchar(10) NOT NULL, 
@@ -60,14 +49,13 @@ CREATE TABLE Type_compte (
   nom_type      varchar(10) NOT NULL,
   PRIMARY KEY (Code));
 
-
 CREATE TABLE Compte (
   NbCompte        varchar(11) NOT NULL, 
   Solde           int4, 
   Decouvert_Aut   int4, 
   ID_titulaire    int4, 
   Type_compte     int4, 
-  IBAN            varchar(27), 
+  IBAN            varchar(255), 
   Id_Agence int4 NOT NULL, 
   PRIMARY KEY (NbCompte));
 
@@ -89,6 +77,55 @@ CREATE TABLE Carte_Bancaire (
   PRIMARY KEY (Numero_Carte));
 
 
+CREATE TABLE nature_debit (
+  id_nature   SERIAL NOT NULL, 
+  Nom_nature varchar(25) NOT NULL, 
+  PRIMARY KEY (id_nature));
+
+
+CREATE TABLE debits (
+  id_debit      SERIAL NOT NULL, 
+  Nbcompte     varchar(10) NOT NULL, 
+  Nature       int4 NOT NULL, 
+  commentaires varchar(255), 
+  PRIMARY KEY (id_debit));
+
+CREATE TABLE comptes_jointes (
+  id_compte          varchar(10) NOT NULL, 
+  id_personne        varchar(10), 
+  procuration        bool, 
+  responsable_unique bool, 
+  Et_ou_OU           int4, 
+  nb_personnes       int4 NOT NULL, 
+  PRIMARY KEY (id_compte));
+
+CREATE TABLE parametres (
+  id_para  int4 NOT NULL, 
+  nom_para varchar(25) NOT NULL, 
+  valeur   int4 NOT NULL, 
+  PRIMARY KEY (id_para));
+CREATE TABLE "Beneficiaires " (
+  Id_bene        int4 NOT NULL, 
+  rib_bene       varchar(15) NOT NULL, 
+  CompteNbCompte varchar(10) NOT NULL, 
+  PRIMARY KEY (Id_bene));
+CREATE TABLE Virements (
+  id_vire        int4 NOT NULL, 
+  unitaire       bool NOT NULL, 
+  montant        int4 NOT NULL, 
+  "date"         timestamp NOT NULL, 
+  date_effect    timestamp NOT NULL, 
+  periodicite    int4 NOT NULL, 
+  CompteNbCompte varchar(10) NOT NULL, 
+  PRIMARY KEY (id_vire));
+CREATE TABLE periodicite (
+  id_periode            int4 NOT NULL, 
+  nom_per               varchar(25) NOT NULL, 
+  temps                 timestamp, 
+  periodiciteid_periode int4 NOT NULL, 
+  PRIMARY KEY (id_periode));
+
+
 
 
 ALTER TABLE Carte_Bancaire ADD CONSTRAINT FKCarte_Bank FOREIGN KEY (Type_carte) REFERENCES Type_carte (Id_Type);
@@ -104,9 +141,6 @@ CREATE TABLE Cheque (
 
 
 ALTER TABLE Cheque ADD CONSTRAINT FKCheque FOREIGN KEY (NbCompte) REFERENCES Compte (NbCompte);
-
-
-
 
 
 CREATE UNIQUE INDEX Compte_NbCompte 
