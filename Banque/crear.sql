@@ -67,7 +67,7 @@ CREATE TABLE Compte (
   Decouvert_Aut   int4, 
   ID_titulaire    int4, 
   Type_compte     int4, 
-  IBAN            varchar(255), 
+  IBAN            varchar(27), 
   Id_Agence int4 NOT NULL, 
   PRIMARY KEY (NbCompte));
 
