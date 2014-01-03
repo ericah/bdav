@@ -12,8 +12,8 @@ CREATE TABLE Cheque (
   PRIMARY KEY (ID_cheque));
 CREATE TABLE Carte_Bancaire (
   Numero_Carte      varchar(16) NOT NULL, 
-  ClŽ_Sec           int4, 
-  Date_validitŽ     date NOT NULL, 
+  Clï¿½_Sec           int4, 
+  Date_validitï¿½     date NOT NULL, 
   id_Titulaire      int4 NOT NULL, 
   RPC               char(1) NOT NULL, 
   Plafond           int4 NOT NULL, 
@@ -33,7 +33,7 @@ CREATE TABLE Type_carte (
   Id_Type        SERIAL NOT NULL, 
   Type          varchar(10) NOT NULL, 
   International int4, 
-  MensualitŽ    int4, 
+  Mensualitï¿½    int4, 
   PRIMARY KEY (Id_Type));
 CREATE TABLE Banque (
   Id_banque   SERIAL NOT NULL, 
