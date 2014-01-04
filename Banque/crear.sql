@@ -140,7 +140,7 @@ CREATE TABLE Virements (
   date_effect    date NOT NULL, 
   flux           char(1) NOT NULL, 
   periodicite    int4 NOT NULL, 
-  TiersId_tiers  int4 NOT NULL, 
+  Id_tiers  	 int4 NOT NULL, 
   nature_trans   int4 NOT NULL, 
   ID_cheque      int4, 
   PRIMARY KEY (id_vire));
