@@ -61,7 +61,7 @@ CREATE TABLE Compte (
   Id_Agence int4 NOT NULL, 
   tolere_depassements bool NOT NULL,
   taux_annuel 	   int4 NOT NULL, 
-  PRIMARY KEY (NbCompte));
+  PRIMARY KEY (id_compte, NbCompte));
 
 ALTER TABLE Compte ADD CONSTRAINT FKCompte FOREIGN KEY (Id_Agence) REFERENCES Agence (Id_Agence);
 ALTER TABLE Compte ADD CONSTRAINT FKCompte_perso FOREIGN KEY (ID_titulaire) REFERENCES Personne (Id_Perso);
