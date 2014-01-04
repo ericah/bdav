@@ -8,7 +8,7 @@ DELETE FROM Banque;
 INSERT INTO Banque VALUES (default, 'FirstBank', 'FST BK BIC', 100000);
 INSERT INTO Banque VALUES (default, 'SecondBank', 'SND BK BIC',200000);
 INSERT INTO Banque VALUES (default, 'ThirdBank', 'THRD BK BIC',300000);
-INSERT INTO Agence VALUES (default, 'FirstAgenceFstBK', 001);
+INSERT INTO Agence VALUES (77770, 'FirstAgenceFstBK', 001);
 INSERT INTO Agence VALUES (default, 'SndAgenceFstBK', 001);
 INSERT INTO Agence VALUES (default, 'ThirdAgenceFstBK', 001);
 INSERT INTO Agence VALUES (default, 'FirstAgenceSndBK', 002);
@@ -32,14 +32,14 @@ INSERT INTO Type_carte VALUES (default, 'retrait', 1, 8);
 INSERT INTO Type_carte VALUES (default, 'paiement', 1, 12);
 INSERT INTO Type_carte VALUES (default, 'credit', 1, 20);
 
-INSERT INTO nature_debit VALUES (default, 'prelevement');
-INSERT INTO nature_debit VALUES (default, 'cheque');
-INSERT INTO nature_debit VALUES (default, 'retrait');
+INSERT INTO nature_trans VALUES (default, 'prelevement');
+INSERT INTO nature_trans VALUES (default, 'cheque');
+INSERT INTO nature_trans VALUES (default, 'retrait');
 
 
 INSERT INTO periodicite VALUES (default, 'Hebdomadaire',7);
 INSERT INTO periodicite VALUES (default, 'Mensuel',30);
 INSERT INTO periodicite VALUES (default, 'Annuel',360);
 
-INSERT INTO parametres VALUES (default,'entetecompte',2004777000);
-
+INSERT INTO parametres VALUES (default,'entetecompte',2014777000);
+INSERT INTO parametres VALUES (default,'Formule_cheque',201401);

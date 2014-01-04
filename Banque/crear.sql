@@ -45,7 +45,7 @@ CREATE TABLE Personne (
 
 CREATE TABLE Type_compte (
   Code            SERIAL NOT NULL, 
-   nom_type     varchar(25) NOT NULL, 
+  nom_type     varchar(25) NOT NULL, 
   unipersonnel bool NOT NULL, 
   tarif_mensuel  int4 NOT NULL,
   PRIMARY KEY (Code));
@@ -58,10 +58,10 @@ CREATE TABLE Compte (
   ID_titulaire    int4 NOT NULL, 
   Type_compte     int4 NOT NULL, 
   IBAN            varchar(27) NOT NULL, 
-  Id_Agence int4 NOT NULL, 
+  Id_Agence 	  int4 NOT NULL, 
   tolere_depassements bool NOT NULL,
   taux_annuel 	   int4 NOT NULL, 
-  PRIMARY KEY (id_compte, NbCompte));
+  PRIMARY KEY (NbCompte));
 
 ALTER TABLE Compte ADD CONSTRAINT FKCompte FOREIGN KEY (Id_Agence) REFERENCES Agence (Id_Agence);
 ALTER TABLE Compte ADD CONSTRAINT FKCompte_perso FOREIGN KEY (ID_titulaire) REFERENCES Personne (Id_Perso);
@@ -69,26 +69,34 @@ ALTER TABLE Compte ADD CONSTRAINT FKType_compte FOREIGN KEY (Type_compte) REFERE
 
 CREATE TABLE Carte_Bancaire (
   Numero_Carte      varchar(16) NOT NULL, 
-  Cle_Sec            char(3) NOT NULL, 
+  Cle_Sec           char(3) NOT NULL, 
   Date_validite     date NOT NULL, 
   id_Titulaire      int4 NOT NULL, 
   RPC               char(1) NOT NULL, 
   Plafond           int4 NOT NULL, 
-  Type_carte	     int4 NOT NULL, 
-  NbCompte    varchar(11) NOT NULL, 
+  Type_carte	    int4 NOT NULL, 
+  NbCompte    	    varchar(11) NOT NULL, 
   PRIMARY KEY (Numero_Carte));
 
-CREATE TABLE nature_debit (
+ALTER TABLE Carte_Bancaire ADD CONSTRAINT FKCarte_Bank FOREIGN KEY (Type_carte) REFERENCES Type_carte (Id_Type);
+ALTER TABLE Carte_Bancaire ADD CONSTRAINT FKCarte_Bank_compte FOREIGN KEY (NbCompte) REFERENCES Compte (NbCompte);
+
+CREATE TABLE nature_trans (
   id_nature   SERIAL NOT NULL, 
-  Nom_nature varchar(25) NOT NULL, 
+  Nom_nature  varchar(25) NOT NULL, 
   PRIMARY KEY (id_nature));
 
 CREATE TABLE debits (
-  id_debit      SERIAL NOT NULL, 
+  id_debit     SERIAL NOT NULL, 
   Nbcompte     varchar(11) NOT NULL, 
   Nature       int4 NOT NULL, 
   commentaires varchar(255), 
   PRIMARY KEY (id_debit));
+
+ALTER TABLE debits ADD CONSTRAINT FKdebits_compte FOREIGN KEY (Nbcompte) REFERENCES Compte (NbCompte);
+ALTER TABLE debits ADD CONSTRAINT FKdebitsNat FOREIGN KEY (Nature) REFERENCES nature_trans (id_nature);
+
+
 
 CREATE TABLE comptes_joints (
   id_compte          varchar(11) NOT NULL, 
@@ -99,6 +107,7 @@ CREATE TABLE comptes_joints (
   PRIMARY KEY (id_compte));
 
 ALTER TABLE comptes_joints ADD CONSTRAINT FKcomptes_jo FOREIGN KEY (id_compte) REFERENCES Compte (NbCompte);
+ALTER TABLE comptes_joints ADD CONSTRAINT FKcomptes_joints FOREIGN KEY (id_2eme_personne) REFERENCES Personne (Id_Perso);
 
 CREATE TABLE Tiers(
   Id_tiers        int4 NOT NULL, 
@@ -129,16 +138,18 @@ CREATE TABLE Virements (
   montant        int4 NOT NULL, 
   date_virement  date NOT NULL, 
   date_effect    date NOT NULL, 
-  periodicite    int4 NOT NULL,
-  id_tiers	 int4 NOT NULL,
-  flux		 char(1) NOT NULL,
+  flux           char(1) NOT NULL, 
+  periodicite    int4 NOT NULL, 
+  TiersId_tiers  int4 NOT NULL, 
+  nature_trans   int4 NOT NULL, 
+  ID_cheque      int4, 
   PRIMARY KEY (id_vire));
  
 ALTER TABLE Virements ADD CONSTRAINT FKVirementsPeriodicite FOREIGN KEY (periodicite) REFERENCES periodicite (id_periode);
 ALTER TABLE Virements ADD CONSTRAINT FKVirementTiers FOREIGN KEY (Id_tiers) REFERENCES Tiers (Id_tiers);
+ALTER TABLE Virements ADD CONSTRAINT FKVirementsNat FOREIGN KEY (nature_trans) REFERENCES nature_trans (id_nature);
 
-ALTER TABLE Carte_Bancaire ADD CONSTRAINT FKCarte_Bank FOREIGN KEY (Type_carte) REFERENCES Type_carte (Id_Type);
-ALTER TABLE Carte_Bancaire ADD CONSTRAINT FKCarte_Bank_compte FOREIGN KEY (NbCompte) REFERENCES Compte (NbCompte);
+
 
 CREATE TABLE Cheque (
   ID_cheque       SERIAL NOT NULL, 

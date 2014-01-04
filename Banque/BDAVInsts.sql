@@ -1,0 +1,189 @@
+INSERT INTO periodicite
+  (id_periode, 
+  nom_per, 
+  NbJours) 
+VALUES 
+  (?, 
+  ?, 
+  ?);
+INSERT INTO Virements
+  (id_vire, 
+  unitaire, 
+  montant, 
+  date_virement, 
+  date_effect, 
+  flux, 
+  periodicite, 
+  TiersId_tiers, 
+  nature_trans, 
+  ID_cheque) 
+VALUES 
+  (?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?);
+INSERT INTO Tiers
+  (Id_tiers, 
+  RIB_tiers, 
+  CompteNbCompte) 
+VALUES 
+  (?, 
+  ?, 
+  ?);
+INSERT INTO parametres
+  (id_para, 
+  nom_para, 
+  valeur) 
+VALUES 
+  (?, 
+  ?, 
+  ?);
+INSERT INTO comptes_joints
+  (id_compte, 
+  id_2eme_personne, 
+  procuration, 
+  responsable_unique, 
+  Et_ou_OU, 
+  CompteDecouvert_Aut) 
+VALUES 
+  (?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?);
+INSERT INTO nature_trans
+  (id_nature, 
+  Nom_nature) 
+VALUES 
+  (?, 
+  ?);
+INSERT INTO debits
+  (id_debit, 
+  commentaires, 
+  Nbcompte, 
+  Nature) 
+VALUES 
+  (?, 
+  ?, 
+  ?, 
+  ?);
+INSERT INTO Type_compte
+  (Code, 
+  nom_type, 
+  unipersonnel, 
+  tarif_mensuel) 
+VALUES 
+  (?, 
+  ?, 
+  ?, 
+  ?);
+INSERT INTO Cheque
+  (ID_cheque, 
+  NbCompte) 
+VALUES 
+  (?, 
+  ?);
+INSERT INTO Carte_Bancaire
+  (Numero_Carte, 
+  Clé_Sec, 
+  Date_validité, 
+  id_Titulaire, 
+  RPC, 
+  Plafond, 
+  Type_carte, 
+  NbCompte) 
+VALUES 
+  (?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?);
+INSERT INTO Personne
+  (Id_Perso, 
+  Num_Doc, 
+  Nom, 
+  Prenom, 
+  Date_Naissance, 
+  Etat_civil, 
+  revenues_annuelles, 
+  Interdit_bancaire) 
+VALUES 
+  (?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?);
+INSERT INTO Type_carte
+  (Id_Type, 
+  Type, 
+  International, 
+  Mensualité) 
+VALUES 
+  (?, 
+  ?, 
+  ?, 
+  ?);
+INSERT INTO Banque
+  (Id_banque, 
+  Nom_banque, 
+  BIC, 
+  Actifs) 
+VALUES 
+  (?, 
+  ?, 
+  ?, 
+  ?);
+INSERT INTO Agence
+  (Id_Agence, 
+  Nom_agence, 
+  BanqueId_banque) 
+VALUES 
+  (?, 
+  ?, 
+  ?);
+INSERT INTO Compte
+  (NbCompte, 
+  id_compte, 
+  Solde, 
+  Decouvert_Aut, 
+  IBAN, 
+  tolere_depassements, 
+  taux_annuel, 
+  ID_titulaire, 
+  Type_compte, 
+  AgenceId_Agence) 
+VALUES 
+  (?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?, 
+  ?);
+INSERT INTO Interdiction_bancaire
+  (id_interd, 
+  id_client, 
+  date_interdit, 
+  date_regularisation) 
+VALUES 
+  (?, 
+  ?, 
+  ?, 
+  ?);
+
