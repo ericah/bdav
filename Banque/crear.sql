@@ -60,7 +60,7 @@ CREATE TABLE Compte (
   IBAN            varchar(27) NOT NULL, 
   Id_Agence 	  int4 NOT NULL, 
   tolere_depassements bool NOT NULL,
-  taux_annuel 	   int4 NOT NULL, 
+  taux_annuel 	   float NOT NULL, 
   PRIMARY KEY (NbCompte));
 
 ALTER TABLE Compte ADD CONSTRAINT FKCompte FOREIGN KEY (Id_Agence) REFERENCES Agence (Id_Agence);
@@ -107,7 +107,7 @@ CREATE TABLE comptes_joints (
   Et_ou_OU           bool,  
   PRIMARY KEY (id_compte_joint));
 
-ALTER TABLE comptes_joints ADD CONSTRAINT FKcomptes_jo FOREIGN KEY (id_compte) REFERENCES Compte (NbCompte);
+ALTER TABLE comptes_joints ADD CONSTRAINT FKcomptes_jo FOREIGN KEY (NbCompte) REFERENCES Compte (NbCompte);
 ALTER TABLE comptes_joints ADD CONSTRAINT FKcomptes_joints FOREIGN KEY (id_2eme_personne) REFERENCES Personne (Id_Perso);
 
 CREATE TABLE Tiers(
