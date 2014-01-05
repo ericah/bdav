@@ -133,17 +133,18 @@ CREATE TABLE periodicite (
   NbJours               int4,
   PRIMARY KEY (id_periode));
 
-CREATE TABLE Virements (
+CREATE TABLE transactions (
   id_vire        int4 NOT NULL, 
   unitaire       bool NOT NULL, 
   montant        int4 NOT NULL, 
-  date_virement  date NOT NULL, 
+  date_virement  TIMESTAMP NOT NULL, 
   date_effect    date NOT NULL, 
   flux           char(1) NOT NULL, 
   periodicite    int4 NOT NULL, 
-  Id_tiers  	 int4 NOT NULL, 
+  Id_tiers  	 int4, 
   nature_trans   int4 NOT NULL, 
   ID_cheque      int4, 
+  transactions	 varchar(16),
   PRIMARY KEY (id_vire));
  
 ALTER TABLE Virements ADD CONSTRAINT FKVirementsPeriodicite FOREIGN KEY (periodicite) REFERENCES periodicite (id_periode);

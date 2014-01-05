@@ -6,12 +6,12 @@ DELETE FROM Agence;
 DELETE FROM Banque;
 
 INSERT INTO Banque VALUES (default, 'FirstBank', 'FST BK BIC', 100000);
-INSERT INTO Banque VALUES (default, 'SecondBank', 'SND BK BIC',200000);
+INSERT INTO Banque VALUES (12345, 'SecondBank', 'SND BK BIC',200000);
 INSERT INTO Banque VALUES (default, 'ThirdBank', 'THRD BK BIC',300000);
 INSERT INTO Agence VALUES (default, 'FirstAgenceFstBK', 001);
 INSERT INTO Agence VALUES (default, 'SndAgenceFstBK', 001);
 INSERT INTO Agence VALUES (default, 'ThirdAgenceFstBK', 001);
-INSERT INTO Agence VALUES (default, 'FirstAgenceSndBK', 002);
+INSERT INTO Agence VALUES (67890, 'FirstAgenceSndBK', 12345);
 INSERT INTO Agence VALUES (default, 'SecondAgenceSndBK', 002);
 INSERT INTO Personne VALUES (default,'2014888001','Castellanos','Alejandro','12/17/1985','M');
 INSERT INTO Personne VALUES (default,'2014888002','Huam','Erica','08/23/1990','M');
@@ -35,8 +35,12 @@ INSERT INTO Type_carte VALUES (default, 'credit', 1, 20);
 INSERT INTO nature_trans VALUES (default, 'prelevement');
 INSERT INTO nature_trans VALUES (default, 'cheque');
 INSERT INTO nature_trans VALUES (default, 'retrait');
+INSERT INTO nature_trans VALUES (default, 'virement unitaire');
+INSERT INTO nature_trans VALUES (default, 'virement periodique');
+INSERT INTO nature_trans VALUES (default, 'dépôt d´ espèces');
 
 
+INSERT INTO periodicite VALUES (default, 'Unitaire',1);
 INSERT INTO periodicite VALUES (default, 'Hebdomadaire',7);
 INSERT INTO periodicite VALUES (default, 'Mensuel',30);
 INSERT INTO periodicite VALUES (default, 'Annuel',360);

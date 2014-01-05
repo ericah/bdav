@@ -145,3 +145,26 @@ CREATE UNIQUE INDEX Compte_NbCompte
 
 
 select get_banque ('12345678');
+
+
+DECLARE
+       v_sysdate DATE := SYSDATE;
+       v_systimestamp TIMESTAMP := SYSTIMESTAMP;
+       v_date DATE;
+       v_number NUMBER(10);
+    BEGIN
+  
+       -- Print the current date and timestamp
+       DBMS_OUTPUT.PUT_LINE(v_systimestamp);
+ 
+   END;
+
+ DBMS_OUTPUT.PUT_LINE(SYSTIMESTAMP);
+
+
+
+creer_transaction ('O',2, 100, '2014-01-06' ,1, '12345678901234567890123',);
+
+INSERT INTO Virements(id_vire, montant, date_virement, date_effect, flux, periodicite, TiersId_tiers, nature_trans,ID_cheque) 
+		VALUES (default,mont, now,date_eff,flux,period, null, nat, Null);
+
