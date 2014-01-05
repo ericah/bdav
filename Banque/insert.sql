@@ -17,10 +17,7 @@ INSERT INTO Agence VALUES (86786, 'FirstAgenceFstBK', 76567);
 INSERT INTO Agence VALUES (78678, 'SndAgenceFstBK', 76567);
 INSERT INTO Agence VALUES (50000, 'ThirdAgenceFstBK', 76567);
 INSERT INTO Agence VALUES (67890, 'FirstAgenceSndBK', 12345);
-<<<<<<< HEAD
 INSERT INTO Agence VALUES (40000, 'SecondAgenceSndBK', 12345);
-
-
 
 INSERT INTO Personne VALUES (default,'201488877001','Castellanos','Alejandro','12/17/1985','M',10400);
 INSERT INTO Personne VALUES (default,'201488877002','Huam','Erica','08/23/1990','M',5200);
@@ -28,15 +25,6 @@ INSERT INTO Personne VALUES (default,'201488877003','Jamal','Meryam','05/15/1990
 INSERT INTO Personne VALUES (default,'201488877004','Tonnelier','Jerome','07/23/1988','M');
 INSERT INTO Personne VALUES (default,'201488877005' ,'Maimaiti', 'Amina','06/28/1984','C');
 
-
-=======
-INSERT INTO Agence VALUES (default, 'SecondAgenceSndBK', 002);
-INSERT INTO Personne VALUES (default,'2014888001','Castellanos','Alejandro','12/17/1985','M',10400);
-INSERT INTO Personne VALUES (default,'2014888002','Huam','Erica','08/23/1990','M',5200);
-INSERT INTO Personne VALUES (default,'2014888003','Jamal','Meryam','05/15/1990','M');
-INSERT INTO Personne VALUES (default,'2014888004','Tonnelier','Jerome','07/23/1988','M');
-INSERT INTO Personne VALUES (default,'2014888005' ,'Maimaiti', 'Amina','06/28/1984','C');
->>>>>>> 88306497bace32ead3b292dd4e6954a38e38ad8c
 INSERT INTO Type_compte VALUES (default,'Epargne',true,0);
 INSERT INTO Type_compte VALUES (default,'Courant',true,1);
 INSERT INTO Type_compte VALUES (default,'Epargne',false,2);
@@ -99,3 +87,10 @@ INSERT INTO parametres VALUES (default, 'cb3bk2plafond', 5000);
 INSERT INTO parametres VALUES (default, 'cb4bk2plafond', 3000);
 INSERT INTO parametres VALUES (default, 'cb5bk2plafond', 5000);
 INSERT INTO parametres VALUES (default, 'cb6bk2plafond', 7000);
+
+INSERT INTO parametres VALUES (default, 'cb1bk3plafond', 1500);
+INSERT INTO parametres VALUES (default, 'cb2bk3plafond', 4000);
+INSERT INTO parametres VALUES (default, 'cb3bk3plafond', 7000);
+INSERT INTO parametres VALUES (default, 'cb4bk3plafond', 4000);
+INSERT INTO parametres VALUES (default, 'cb5bk3plafond', 7000);
+INSERT INTO parametres VALUES (default, 'cb6bk3plafond', 9000);
