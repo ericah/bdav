@@ -70,7 +70,7 @@ ALTER TABLE Compte ADD CONSTRAINT FKType_compte FOREIGN KEY (Type_compte) REFERE
 CREATE TABLE Carte_Bancaire (
   Numero_Carte      varchar(16) NOT NULL, 
   Cle_Sec           char(3) NOT NULL, 
-  Date_validite     date NOT NULL, 
+  Date_validite     varchar(6) NOT NULL, 
   id_Titulaire      int4 NOT NULL, 
   RPC               char(1) NOT NULL, 
   Plafond           int4 NOT NULL, 
