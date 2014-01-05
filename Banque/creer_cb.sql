@@ -72,13 +72,13 @@ DECLARE
 BEGIN
 	SELECT NbCompte INTO nb FROM compte WHERE id_compte=id_cpt;
 
-	SELECT COUNT(*) INTO nb_carte
+	SELECT COUNT(DISTINCT numero_carte) INTO nb_carte
 	FROM carte_bancaire WHERE NbCompte=nb AND id_titulaire=titulaire;
 
 	IF nb_carte != 0 THEN num_carte=NULL;
 	ELSE SELECT creer_cb(id_cpt,id_type_cb) INTO num_carte;
 	END IF;
 
-	RETURN num_carte;
+	RETURN nb_carte;
 END;
 $$ LANGUAGE plpgsql;
