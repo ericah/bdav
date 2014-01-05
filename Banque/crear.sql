@@ -68,9 +68,15 @@ ALTER TABLE Compte ADD CONSTRAINT FKCompte_perso FOREIGN KEY (ID_titulaire) REFE
 ALTER TABLE Compte ADD CONSTRAINT FKType_compte FOREIGN KEY (Type_compte) REFERENCES  Type_compte (Code);
 
 CREATE TABLE Carte_Bancaire (
+<<<<<<< HEAD
   Numero_Carte      varchar(16) NOT NULL UNIQUE CHECK (length(Numero_Carte)=16), 
   Cle_Sec           char(3) NOT NULL CHECK (length(Cle_Sec)=3), 
   Date_validite     date NOT NULL, 
+=======
+  Numero_Carte      varchar(16) NOT NULL, 
+  Cle_Sec           char(3) NOT NULL, 
+  Date_validite     varchar(6) NOT NULL, 
+>>>>>>> 88306497bace32ead3b292dd4e6954a38e38ad8c
   id_Titulaire      int4 NOT NULL, 
   RPC               char(1) NOT NULL, 
   Plafond           int4 NOT NULL, 
