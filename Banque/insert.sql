@@ -56,41 +56,42 @@ INSERT INTO periodicite VALUES (default, 'Annuel',360);
 INSERT INTO parametres VALUES (default,'entetecompte',2014777000);
 INSERT INTO parametres VALUES (default,'Formule_cheque',201401);
 
-INSERT INTO parametres VALUES (default,'formule_cb_bk1',20143849);
-INSERT INTO parametres VALUES (default,'formule_cb_bk2',20144512);
+INSERT INTO parametres VALUES (default,'formule_cb_bk76567',20143849);
+INSERT INTO parametres VALUES (default,'formule_cb_bk12345',20144512);
+INSERT INTO parametres VALUES (default,'formule_cb_bk75765',20142718);
 
-INSERT INTO parametres VALUES (default,'bk1codecpt1', 35);
-INSERT INTO parametres VALUES (default,'bk1codecpt2', 15);
-INSERT INTO parametres VALUES (default,'bk1codecpt3', 70);
-INSERT INTO parametres VALUES (default,'bk1codecpt4', 57);
+INSERT INTO parametres VALUES (default,'bk76567codecpt1', 35);
+INSERT INTO parametres VALUES (default,'bk76567codecpt2', 15);
+INSERT INTO parametres VALUES (default,'bk76567codecpt3', 70);
+INSERT INTO parametres VALUES (default,'bk76567codecpt4', 57);
 
-INSERT INTO parametres VALUES (default,'bk2codecpt1', 25);
-INSERT INTO parametres VALUES (default,'bk2codecpt2', 20);
-INSERT INTO parametres VALUES (default,'bk2codecpt3', 75);
-INSERT INTO parametres VALUES (default,'bk2codecpt4', 57);
+INSERT INTO parametres VALUES (default,'bk12345codecpt1', 25);
+INSERT INTO parametres VALUES (default,'bk12345codecpt2', 20);
+INSERT INTO parametres VALUES (default,'bk12345codecpt3', 75);
+INSERT INTO parametres VALUES (default,'bk12345codecpt4', 57);
 
-INSERT INTO parametres VALUES (default,'bk3codecpt1', 30);
-INSERT INTO parametres VALUES (default,'bk3codecpt2', 20);
-INSERT INTO parametres VALUES (default,'bk3codecpt3', 65);
-INSERT INTO parametres VALUES (default,'bk3codecpt4', 55);
+INSERT INTO parametres VALUES (default,'bk75765codecpt1', 30);
+INSERT INTO parametres VALUES (default,'bk75765codecpt2', 20);
+INSERT INTO parametres VALUES (default,'bk75765codecpt3', 65);
+INSERT INTO parametres VALUES (default,'bk75765codecpt4', 55);
 
-INSERT INTO parametres VALUES (default, 'cb1bk1plafond', 2000);
-INSERT INTO parametres VALUES (default, 'cb2bk1plafond', 6000);
-INSERT INTO parametres VALUES (default, 'cb3bk1plafond', 8000);
-INSERT INTO parametres VALUES (default, 'cb4bk1plafond', 6000);
-INSERT INTO parametres VALUES (default, 'cb5bk1plafond', 8000);
-INSERT INTO parametres VALUES (default, 'cb6bk1plafond', 10000);
+INSERT INTO parametres VALUES (default, 'cb1bk76567plafond', 2000);
+INSERT INTO parametres VALUES (default, 'cb2bk76567plafond', 6000);
+INSERT INTO parametres VALUES (default, 'cb3bk76567plafond', 8000);
+INSERT INTO parametres VALUES (default, 'cb4bk76567plafond', 6000);
+INSERT INTO parametres VALUES (default, 'cb5bk76567plafond', 8000);
+INSERT INTO parametres VALUES (default, 'cb6bk76567plafond', 10000);
 
-INSERT INTO parametres VALUES (default, 'cb1bk2plafond', 1000);
-INSERT INTO parametres VALUES (default, 'cb2bk2plafond', 3000);
-INSERT INTO parametres VALUES (default, 'cb3bk2plafond', 5000);
-INSERT INTO parametres VALUES (default, 'cb4bk2plafond', 3000);
-INSERT INTO parametres VALUES (default, 'cb5bk2plafond', 5000);
-INSERT INTO parametres VALUES (default, 'cb6bk2plafond', 7000);
+INSERT INTO parametres VALUES (default, 'cb1bk12345plafond', 1000);
+INSERT INTO parametres VALUES (default, 'cb2bk12345plafond', 3000);
+INSERT INTO parametres VALUES (default, 'cb3bk12345plafond', 5000);
+INSERT INTO parametres VALUES (default, 'cb4bk12345plafond', 3000);
+INSERT INTO parametres VALUES (default, 'cb5bk12345plafond', 5000);
+INSERT INTO parametres VALUES (default, 'cb6bk12345plafond', 7000);
 
-INSERT INTO parametres VALUES (default, 'cb1bk3plafond', 1500);
-INSERT INTO parametres VALUES (default, 'cb2bk3plafond', 4000);
-INSERT INTO parametres VALUES (default, 'cb3bk3plafond', 7000);
-INSERT INTO parametres VALUES (default, 'cb4bk3plafond', 4000);
-INSERT INTO parametres VALUES (default, 'cb5bk3plafond', 7000);
-INSERT INTO parametres VALUES (default, 'cb6bk3plafond', 9000);
+INSERT INTO parametres VALUES (default, 'cb1bk75765plafond', 1500);
+INSERT INTO parametres VALUES (default, 'cb2bk75765plafond', 4000);
+INSERT INTO parametres VALUES (default, 'cb3bk75765plafond', 7000);
+INSERT INTO parametres VALUES (default, 'cb4bk75765plafond', 4000);
+INSERT INTO parametres VALUES (default, 'cb5bk75765plafond', 7000);
+INSERT INTO parametres VALUES (default, 'cb6bk75765plafond', 9000);

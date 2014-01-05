@@ -2,13 +2,13 @@ DROP FUNCTION creer_cb(int4, int4);
 
 CREATE OR REPLACE FUNCTION creer_cle_sec() RETURNS varchar(3) AS $$
 BEGIN
-	RETURN TRUNC(RANDOM() * 199 + 1);
+	RETURN TRUNC(RANDOM() * 899 + 100);
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION random_8char() RETURNS varchar(8) AS $$
+CREATE OR REPLACE FUNCTION random_4char() RETURNS varchar(8) AS $$
 BEGIN
-	RETURN TRUNC(RANDOM() * 199999999 + 1);
+	RETURN TRUNC(RANDOM() * 8999 + 1000);
 END;
 $$ LANGUAGE plpgsql;
 
@@ -27,7 +27,8 @@ DECLARE
 	num varchar(16);
 	nb varchar(11);
 	val1 varchar(8);
-	val2 varchar(8);
+	val2 varchar(4);
+	val3 varchar(4);
 	titulaire int4;
 	maxi int4;
 	choix_rpc char(1);
@@ -40,8 +41,10 @@ BEGIN
 	
 	SELECT valeur::varchar(8) INTO val1
 	FROM parametres WHERE nom_para=('formule_cb_bk'||bk);
-	SELECT random_8char() INTO val2;
-	num := val1 || val2;
+	SELECT random_4char() INTO val2;
+	SELECT random_4char() INTO val3;
+	num := val1 || val2 || val3;
+	num := substring(num from 1 for 16);
 
 	SELECT creer_cle_sec() INTO cle;
 	SELECT max_date() INTO valide;
@@ -58,5 +61,24 @@ BEGIN
 	INSERT INTO carte_bancaire VALUES (num,cle,valide,titulaire,choix_rpc,maxi,id_type_cb,nb);
 	
 	RETURN num;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION creer_cb_joint(id_cpt int4, id_type_cb int4, titulaire int4) RETURNS varchar(16) AS $$
+DECLARE
+	num_carte varchar(16);
+	nb varchar(11);
+	nb_carte integer;
+BEGIN
+	SELECT NbCompte INTO nb FROM compte WHERE id_compte=id_cpt;
+
+	SELECT COUNT(*) INTO nb_carte
+	FROM carte_bancaire WHERE NbCompte=nb AND id_titulaire=titulaire;
+
+	IF nb_carte != 0 THEN num_carte=NULL;
+	ELSE SELECT creer_cb(id_cpt,id_type_cb) INTO num_carte;
+	END IF;
+
+	RETURN num_carte;
 END;
 $$ LANGUAGE plpgsql;
