@@ -1,4 +1,4 @@
-
+DROP FUNCTION creer_cb(int4, int4);
 
 CREATE OR REPLACE FUNCTION creer_cle_sec() RETURNS varchar(3) AS $$
 BEGIN
@@ -21,12 +21,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION creer_cb(id_cpt int4, titulaire int4, id_type_cb int4) RETURNS varchar(16) AS $$
+CREATE OR REPLACE FUNCTION creer_cb(id_cpt int4, id_type_cb int4) RETURNS varchar(16) AS $$
 DECLARE
 	bk int4;
 	num varchar(16);
 	nb varchar(11);
-	val varchar(8);
+	val1 varchar(8);
+	val2 varchar(8);
 	titulaire int4;
 	maxi int4;
 	choix_rpc char(1);
@@ -37,11 +38,10 @@ BEGIN
 	FROM banque NATURAL JOIN agence NATURAL JOIN compte
 	WHERE id_compte=id_cpt;
 	
-	SELECT valeur::varchar(8) INTO num
+	SELECT valeur::varchar(8) INTO val1
 	FROM parametres WHERE nom_para=('formule_cb_bk'||bk);
-
-	SELECT random_8char() INTO val;
-	num := num || val;
+	SELECT random_8char() INTO val2;
+	num := val1 || val2;
 
 	SELECT creer_cle_sec() INTO cle;
 	SELECT max_date() INTO valide;
