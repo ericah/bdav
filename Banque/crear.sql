@@ -11,56 +11,56 @@ CREATE DATABASE "BDAV"
 
 CREATE TABLE Banque (
   Id_banque   SERIAL NOT NULL, 
-  Nom_banque varchar(30) NOT NULL UNIQUE, 
-  BIC        varchar(15) NOT NULL UNIQUE, 
-  Actifs     int4 NOT NULL, 
+  Nom_banque  varchar(30) NOT NULL UNIQUE, 
+  BIC         varchar(15) NOT NULL UNIQUE, 
+  Actifs      int4 NOT NULL, 
   CONSTRAINT PK_banque 
     PRIMARY KEY (Id_banque));
 
 CREATE TABLE Agence (
   Id_Agence        SERIAL NOT NULL, 
-  Nom_agence      varchar(30) NOT NULL, 
-  BanqueId_banque int4 NOT NULL, 
+  Nom_agence       varchar(30) NOT NULL, 
+  BanqueId_banque  int4 NOT NULL, 
   PRIMARY KEY (Id_Agence));
 
 ALTER TABLE Agence ADD CONSTRAINT FKAgence FOREIGN KEY (BanqueId_banque) REFERENCES Banque (Id_banque);
  
 CREATE TABLE Type_carte (
-  Id_Type        SERIAL NOT NULL, 
-  Nom_Type          varchar(10) NOT NULL, 
-  International int4, 
-  Mensualite    int4, 
+  Id_Type    		SERIAL NOT NULL, 
+  Nom_Type   		varchar(10) NOT NULL, 
+  International		int4, 
+  Mensualite    	int4, 
   PRIMARY KEY (Id_Type));
 
 CREATE TABLE Personne (
-  Id_Perso        SERIAL NOT NULL,
-  Num_Doc       varchar(12) NOT NULL, 
-  Nom            varchar(30) NOT NULL, 
-  Prenom         varchar(30) NOT NULL, 
-  Date_Naissance date NOT NULL, 
-  Etat_civil     char(1) NOT NULL, 
-  revenues_annuelles int4, 
-  interdit_bancaire  bool,
+  Id_Perso            SERIAL NOT NULL,
+  Num_Doc             varchar(12) NOT NULL, 
+  Nom                 varchar(30) NOT NULL, 
+  Prenom              varchar(30) NOT NULL, 
+  Date_Naissance      date NOT NULL, 
+  Etat_civil          char(1) NOT NULL, 
+  revenues_annuelles  int4, 
+  interdit_bancaire   bool,
   PRIMARY KEY (Id_Perso));
 
 CREATE TABLE Type_compte (
   Code            SERIAL NOT NULL, 
-  nom_type     varchar(25) NOT NULL, 
-  unipersonnel bool NOT NULL, 
-  tarif_mensuel  int4 NOT NULL,
+  nom_type     	  varchar(25) NOT NULL, 
+  unipersonnel 	  bool NOT NULL, 
+  tarif_mensuel   int4 NOT NULL,
   PRIMARY KEY (Code));
 
 CREATE TABLE Compte (
-  id_compte  	  SERIAL NOT NULL,  
-  NbCompte        varchar(11) NOT NULL, 
-  Solde           int4 NOT NULL, 
-  Decouvert_Aut   int4 NOT NULL, 
-  ID_titulaire    int4 NOT NULL, 
-  Type_compte     int4 NOT NULL, 
-  IBAN            varchar(27) NOT NULL, 
-  Id_Agence 	  int4 NOT NULL, 
-  tolere_depassements bool NOT NULL,
-  taux_annuel 	   float NOT NULL, 
+  id_compte		SERIAL NOT NULL,  
+  NbCompte        	varchar(11) NOT NULL, 
+  Solde         	int4 NOT NULL, 
+  Decouvert_Aut     	int4 NOT NULL, 
+  ID_titulaire       	int4 NOT NULL, 
+  Type_compte          	int4 NOT NULL, 
+  IBAN                 	varchar(27) NOT NULL, 
+  Id_Agence	 	int4 NOT NULL, 
+  tolere_depassements	bool NOT NULL,
+  taux_annuel 	      	float NOT NULL, 
   PRIMARY KEY (NbCompte));
 
 ALTER TABLE Compte ADD CONSTRAINT FKCompte FOREIGN KEY (Id_Agence) REFERENCES Agence (Id_Agence);
@@ -96,8 +96,6 @@ CREATE TABLE debits (
 ALTER TABLE debits ADD CONSTRAINT FKdebits_compte FOREIGN KEY (Nbcompte) REFERENCES Compte (NbCompte);
 ALTER TABLE debits ADD CONSTRAINT FKdebitsNat FOREIGN KEY (Nature) REFERENCES nature_trans (id_nature);
 
-
-
 CREATE TABLE comptes_joints (
   id_compte_joint    SERIAL NOT NULL,     
   NbCompte	     varchar(11) NOT NULL, 
@@ -119,16 +117,16 @@ CREATE TABLE Tiers(
 ALTER TABLE Tiers ADD CONSTRAINT FKTiers FOREIGN KEY (CompteNbCompte) REFERENCES Compte (NbCompte);
 
 CREATE TABLE Interdiction_bancaire (
-  id_interd     SERIAL NOT NULL, 
-  id_client     int4 NOT NULL, 
-  date_interdit date NOT NULL,
-  date_regularisation date, 
+  id_interd		SERIAL NOT NULL, 
+  id_client            	int4 NOT NULL, 
+  date_interdit        	date NOT NULL,
+  date_regularisation  	date, 
   PRIMARY KEY (id_interd));
 
 ALTER TABLE Interdiction_bancaire ADD CONSTRAINT FKInterdicti FOREIGN KEY (id_client) REFERENCES Personne (Id_Perso);
 
 CREATE TABLE periodicite (
-  id_periode            SERIAL NOT NULL, 
+  id_periode 		SERIAL NOT NULL, 
   nom_per               varchar(25) NOT NULL, 
   NbJours               int4,
   PRIMARY KEY (id_periode));
@@ -151,8 +149,6 @@ ALTER TABLE Virements ADD CONSTRAINT FKVirementsPeriodicite FOREIGN KEY (periodi
 ALTER TABLE Virements ADD CONSTRAINT FKVirementTiers FOREIGN KEY (Id_tiers) REFERENCES Tiers (Id_tiers);
 ALTER TABLE Virements ADD CONSTRAINT FKVirementsNat FOREIGN KEY (nature_trans) REFERENCES nature_trans (id_nature);
 
-
-
 CREATE TABLE Cheque (
   ID_cheque       SERIAL NOT NULL, 
   NbCompte 	  varchar(11) NOT NULL, 
@@ -172,13 +168,7 @@ CREATE UNIQUE INDEX Carte_Bancaire_Numero_Carte
   ON Carte_Bancaire (Numero_Carte);
 CREATE UNIQUE INDEX Cheque_ID_cheque 
   ON Cheque (ID_cheque);
-/*
-CREATE TABLE frais (
-       id_frais int4 NOT NULL,
-       nom_frais varchar(25) NOT NULL,
-       valeur int4 NOT NULL,
-       PRIMARY KEY (id_frais));
-*/
+
 CREATE TABLE parametres (
   id_para  SERIAL NOT NULL, 
   nom_para varchar(25) NOT NULL unique, 
