@@ -147,6 +147,17 @@ CREATE UNIQUE INDEX Compte_NbCompte
 select get_banque ('12345678');
 
 
+SELECT 
+  compte.id_compte
+FROM 
+  public.compte, 
+  public.agence, 
+  public.banque
+WHERE 
+  compte.id_agence = agence.id_agence AND
+  agence.banqueid_banque = banque.id_banque;
+
+
 DECLARE
        v_sysdate DATE := SYSDATE;
        v_systimestamp TIMESTAMP := SYSTIMESTAMP;
@@ -162,9 +173,30 @@ DECLARE
  DBMS_OUTPUT.PUT_LINE(SYSTIMESTAMP);
 
 
+--retrait
+creer_transaction ('O',3, 100, '2014-01-06' ,1, null,null);
 
-creer_transaction ('O',2, 100, '2014-01-06' ,1, '12345678901234567890123',);
 
 INSERT INTO Virements(id_vire, montant, date_virement, date_effect, flux, periodicite, TiersId_tiers, nature_trans,ID_cheque) 
 		VALUES (default,mont, now,date_eff,flux,period, null, nat, Null);
+
+INSERT INTO debits(id_debit, commentaires, Nbcompte, Nature) ;
+VALUES (default, 'retrait espece', mon_nbcompte, nat);
+
+
+UPDATE compte
+   SET solde=solde-mont
+ WHERE nbcompte=mon_nbcompte;
+
+
+--cheque
+creer_transaction ('O',2, 100, '2014-01-06' ,1, '12345678901234567890123',8888801);
+
+
+
+INSERT INTO Virements(id_vire, montant, date_virement, date_effect, flux, periodicite, TiersId_tiers, nature_trans,ID_cheque) 
+		VALUES (default,mont, now,date_eff,flux,period, null, nat, Null);
+
+
+
 

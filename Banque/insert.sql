@@ -9,27 +9,25 @@ DELETE FROM Personne;
 DELETE FROM Agence;
 DELETE FROM Banque;
 
-INSERT INTO Banque VALUES (default, 'FirstBank', 'FST BK BIC', 100000);
+INSERT INTO Banque VALUES (76567, 'FirstBank', 'FST BK BIC', 100000);
 INSERT INTO Banque VALUES (12345, 'SecondBank', 'SND BK BIC',200000);
-INSERT INTO Banque VALUES (default, 'ThirdBank', 'THRD BK BIC',300000);
-INSERT INTO Agence VALUES (default, 'FirstAgenceFstBK', 001);
-INSERT INTO Agence VALUES (default, 'SndAgenceFstBK', 001);
-INSERT INTO Agence VALUES (default, 'ThirdAgenceFstBK', 001);
-INSERT INTO Agence VALUES (67890, 'FirstAgenceSndBK', 12345);
-INSERT INTO Agence VALUES (default, 'SecondAgenceSndBK', 002);
-INSERT INTO Personne VALUES (default,'2014888001','Castellanos','Alejandro','12/17/1985','M');
-INSERT INTO Personne VALUES (default,'2014888002','Huam','Erica','08/23/1990','M');
-INSERT INTO Agence VALUES (default, 'FirstAgenceFstBK', 1);
-INSERT INTO Agence VALUES (default, 'SndAgenceFstBK', 1);
-INSERT INTO Agence VALUES (default, 'ThirdAgenceFstBK', 1);
-INSERT INTO Agence VALUES (default, 'FirstAgenceSndBK', 2);
-INSERT INTO Agence VALUES (default, 'SecondAgenceSndBK', 2);
-INSERT INTO Personne VALUES (default,'2014888001','Castellanos','Alejandro','12/17/1985','M',10400);
-INSERT INTO Personne VALUES (default,'2014888002','Huam','Erica','08/23/1990','M',5200);
+INSERT INTO Banque VALUES (75765, 'ThirdBank', 'THRD BK BIC',300000);
 
-INSERT INTO Personne VALUES (default,'2014888003','Jamal','Meryam','05/15/1990','M');
-INSERT INTO Personne VALUES (default,'2014888004','Tonnelier','Jerome','07/23/1988','M');
-INSERT INTO Personne VALUES (default,'2014888005' ,'Maimaiti', 'Amina','06/28/1984','C');
+INSERT INTO Agence VALUES (86786, 'FirstAgenceFstBK', 76567);
+INSERT INTO Agence VALUES (78678, 'SndAgenceFstBK', 76567);
+INSERT INTO Agence VALUES (50000, 'ThirdAgenceFstBK', 76567);
+INSERT INTO Agence VALUES (67890, 'FirstAgenceSndBK', 12345);
+INSERT INTO Agence VALUES (40000, 'SecondAgenceSndBK', 12345);
+
+
+
+INSERT INTO Personne VALUES (default,'201488877001','Castellanos','Alejandro','12/17/1985','M',10400);
+INSERT INTO Personne VALUES (default,'201488877002','Huam','Erica','08/23/1990','M',5200);
+INSERT INTO Personne VALUES (default,'201488877003','Jamal','Meryam','05/15/1990','M');
+INSERT INTO Personne VALUES (default,'201488877004','Tonnelier','Jerome','07/23/1988','M');
+INSERT INTO Personne VALUES (default,'201488877005' ,'Maimaiti', 'Amina','06/28/1984','C');
+
+
 INSERT INTO Type_compte VALUES (default,'Epargne',true,0);
 INSERT INTO Type_compte VALUES (default,'Courant',true,1);
 INSERT INTO Type_compte VALUES (default,'Epargne',false,2);

@@ -10,7 +10,7 @@ CREATE DATABASE "BDAV"
 \connect BDAV
 
 CREATE TABLE Banque (
-  Id_banque   SERIAL NOT NULL, 
+  Id_banque   SERIAL NOT NULL check (Id_banque between 10000 and 99999), 
   Nom_banque  varchar(30) NOT NULL UNIQUE, 
   BIC         varchar(15) NOT NULL UNIQUE, 
   Actifs      int4 NOT NULL, 
@@ -18,7 +18,7 @@ CREATE TABLE Banque (
     PRIMARY KEY (Id_banque));
 
 CREATE TABLE Agence (
-  Id_Agence        SERIAL NOT NULL, 
+  Id_Agence        SERIAL NOT NULL check (Id_Agence between 10000 and 99999), 
   Nom_agence       varchar(30) NOT NULL, 
   BanqueId_banque  int4 NOT NULL, 
   PRIMARY KEY (Id_Agence));
@@ -34,7 +34,7 @@ CREATE TABLE Type_carte (
 
 CREATE TABLE Personne (
   Id_Perso            SERIAL NOT NULL,
-  Num_Doc             varchar(12) NOT NULL, 
+  Num_Doc             varchar(12) NOT NULL CHECK (length(Num_Doc)=12), 
   Nom                 varchar(30) NOT NULL, 
   Prenom              varchar(30) NOT NULL, 
   Date_Naissance      date NOT NULL, 
@@ -52,12 +52,12 @@ CREATE TABLE Type_compte (
 
 CREATE TABLE Compte (
   id_compte		SERIAL NOT NULL,  
-  NbCompte        	varchar(11) NOT NULL, 
+  NbCompte        	varchar(11) NOT NULL CHECK (length(NbCompte)=11), 
   Solde         	int4 NOT NULL, 
   Decouvert_Aut     	int4 NOT NULL, 
   ID_titulaire       	int4 NOT NULL, 
   Type_compte          	int4 NOT NULL, 
-  IBAN                 	varchar(27) NOT NULL, 
+  IBAN                 	varchar(27) NOT NULL CHECK (length(IBAN)=27), 
   Id_Agence	 	int4 NOT NULL, 
   tolere_depassements	bool NOT NULL,
   taux_annuel 	      	float NOT NULL, 
@@ -68,8 +68,8 @@ ALTER TABLE Compte ADD CONSTRAINT FKCompte_perso FOREIGN KEY (ID_titulaire) REFE
 ALTER TABLE Compte ADD CONSTRAINT FKType_compte FOREIGN KEY (Type_compte) REFERENCES  Type_compte (Code);
 
 CREATE TABLE Carte_Bancaire (
-  Numero_Carte      varchar(16) NOT NULL, 
-  Cle_Sec           char(3) NOT NULL, 
+  Numero_Carte      varchar(16) NOT NULL UNIQUE CHECK (length(Numero_Carte)=16), 
+  Cle_Sec           char(3) NOT NULL CHECK (length(Cle_Sec)=3), 
   Date_validite     date NOT NULL, 
   id_Titulaire      int4 NOT NULL, 
   RPC               char(1) NOT NULL, 
@@ -98,7 +98,7 @@ ALTER TABLE debits ADD CONSTRAINT FKdebitsNat FOREIGN KEY (Nature) REFERENCES na
 
 CREATE TABLE comptes_joints (
   id_compte_joint    SERIAL NOT NULL,     
-  NbCompte	     varchar(11) NOT NULL, 
+  NbCompte	     varchar(11) NOT NULL  CHECK (length(NbCompte)=11), 
   id_2eme_personne   int4, 
   procuration        bool, 
   responsable_unique bool, 
@@ -110,7 +110,7 @@ ALTER TABLE comptes_joints ADD CONSTRAINT FKcomptes_joints FOREIGN KEY (id_2eme_
 
 CREATE TABLE Tiers(
   Id_tiers        int4 NOT NULL, 
-  rib_tiers       varchar(23) NOT NULL, 
+  rib_tiers       varchar(23) NOT NULL  CHECK (length(rib_tiers)=22), 
   CompteNbCompte  varchar(11) NOT NULL, 
   PRIMARY KEY (Id_tiers));
 
@@ -132,25 +132,25 @@ CREATE TABLE periodicite (
   PRIMARY KEY (id_periode));
 
 CREATE TABLE transactions (
-  id_vire        int4 NOT NULL, 
+  id_trans       int4 NOT NULL, 
   unitaire       bool NOT NULL, 
   montant        int4 NOT NULL, 
-  date_virement  TIMESTAMP NOT NULL, 
-  date_effect    date NOT NULL, 
-  flux           char(1) NOT NULL, 
+  date_trans  	 TIMESTAMP NOT NULL, 
+  date_effect    TIMESTAMP NOT NULL, 
+  flux           char(1) NOT NULL CHECK (flux='I' OR flux='O'), 
   periodicite    int4 NOT NULL, 
   Id_tiers  	 int4, 
   nature_trans   int4 NOT NULL, 
   ID_cheque      int4, 
-  transactions	 varchar(16),
-  PRIMARY KEY (id_vire));
+  num_carte	 varchar(16),
+  PRIMARY KEY (id_trans));
  
-ALTER TABLE Virements ADD CONSTRAINT FKVirementsPeriodicite FOREIGN KEY (periodicite) REFERENCES periodicite (id_periode);
-ALTER TABLE Virements ADD CONSTRAINT FKVirementTiers FOREIGN KEY (Id_tiers) REFERENCES Tiers (Id_tiers);
-ALTER TABLE Virements ADD CONSTRAINT FKVirementsNat FOREIGN KEY (nature_trans) REFERENCES nature_trans (id_nature);
+ALTER TABLE transactions ADD CONSTRAINT FKtransactionsPeriodicite FOREIGN KEY (periodicite) REFERENCES periodicite (id_periode);
+ALTER TABLE transactions ADD CONSTRAINT FKtransactionsTiers FOREIGN KEY (Id_tiers) REFERENCES Tiers (Id_tiers);
+ALTER TABLE transactions ADD CONSTRAINT FKtransactionsNat FOREIGN KEY (nature_trans) REFERENCES nature_trans (id_nature);
 
 CREATE TABLE Cheque (
-  ID_cheque       SERIAL NOT NULL, 
+  ID_cheque       SERIAL NOT NULL check (ID_cheque between 1000000 and 9999999), 
   NbCompte 	  varchar(11) NOT NULL, 
   PRIMARY KEY (ID_cheque));
 
