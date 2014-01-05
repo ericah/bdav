@@ -44,13 +44,13 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION creer_iban(c varchar(11), b int4, a int4) RETURNS varchar(27) AS $$
+CREATE OR REPLACE FUNCTION creer_iban(compte_code varchar(11), banque_code int4, agence_code int4) RETURNS varchar(27) AS $$
 DECLARE
 	iban varchar(27);
 	cle varchar(2);
 BEGIN
 	SELECT creer_cle_rib() INTO cle; 
-	iban := 'FR76' || b || a || c || cle;
+	iban := 'FR76' || banque_code || agence_code || compte_code || cle;
 	RETURN iban;
 END;
 $$ LANGUAGE plpgsql;
@@ -85,7 +85,7 @@ CREATE OR REPLACE FUNCTION calcul_taux_annuel(id_cpt int4) RETURNS float AS $$
 DECLARE
 	bk int4;
 	cpt int4;
-	info varchar(11);
+	info varchar(15);
 	val int4;
 BEGIN
 	SELECT id_banque,type_compte INTO bk,cpt
