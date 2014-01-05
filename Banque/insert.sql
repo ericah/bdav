@@ -58,6 +58,7 @@ INSERT INTO parametres VALUES (default,'Formule_cheque',201401);
 
 INSERT INTO parametres VALUES (default,'formule_cb_bk1',20143849);
 INSERT INTO parametres VALUES (default,'formule_cb_bk2',20144512);
+INSERT INTO parametres VALUES (default,'formule_cb_bk3',20142718);
 
 INSERT INTO parametres VALUES (default,'bk1codecpt1', 35);
 INSERT INTO parametres VALUES (default,'bk1codecpt2', 15);
