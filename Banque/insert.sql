@@ -8,7 +8,7 @@ DELETE FROM Banque;
 INSERT INTO Banque VALUES (default, 'FirstBank', 'FST BK BIC', 100000);
 INSERT INTO Banque VALUES (default, 'SecondBank', 'SND BK BIC',200000);
 INSERT INTO Banque VALUES (default, 'ThirdBank', 'THRD BK BIC',300000);
-INSERT INTO Agence VALUES (77770, 'FirstAgenceFstBK', 001);
+INSERT INTO Agence VALUES (default, 'FirstAgenceFstBK', 001);
 INSERT INTO Agence VALUES (default, 'SndAgenceFstBK', 001);
 INSERT INTO Agence VALUES (default, 'ThirdAgenceFstBK', 001);
 INSERT INTO Agence VALUES (default, 'FirstAgenceSndBK', 002);

@@ -142,3 +142,6 @@ CREATE INDEX Agence_Id_Agence
 CREATE UNIQUE INDEX Compte_NbCompte 
   ON Compte (NbCompte);
 
+
+
+select get_banque ('12345678');

@@ -99,12 +99,13 @@ ALTER TABLE debits ADD CONSTRAINT FKdebitsNat FOREIGN KEY (Nature) REFERENCES na
 
 
 CREATE TABLE comptes_joints (
-  id_compte          varchar(11) NOT NULL, 
+  id_compte_joint    SERIAL NOT NULL,     
+  NbCompte	     varchar(11) NOT NULL, 
   id_2eme_personne   int4, 
   procuration        bool, 
   responsable_unique bool, 
   Et_ou_OU           bool,  
-  PRIMARY KEY (id_compte));
+  PRIMARY KEY (id_compte_joint));
 
 ALTER TABLE comptes_joints ADD CONSTRAINT FKcomptes_jo FOREIGN KEY (id_compte) REFERENCES Compte (NbCompte);
 ALTER TABLE comptes_joints ADD CONSTRAINT FKcomptes_joints FOREIGN KEY (id_2eme_personne) REFERENCES Personne (Id_Perso);
@@ -179,6 +180,6 @@ CREATE TABLE frais (
 */
 CREATE TABLE parametres (
   id_para  SERIAL NOT NULL, 
-  nom_para varchar(25) NOT NULL, 
+  nom_para varchar(25) NOT NULL unique, 
   valeur   int4 NOT NULL, 
   PRIMARY KEY (id_para));
