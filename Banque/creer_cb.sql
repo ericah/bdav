@@ -1,4 +1,5 @@
 DROP FUNCTION creer_cb(int4, int4);
+DROP FUNCTION creer_cb_joint(int4, int4, int4);
 
 CREATE OR REPLACE FUNCTION creer_cle_sec() RETURNS varchar(3) AS $$
 BEGIN
@@ -64,21 +65,25 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION creer_cb_joint(id_cpt int4, id_type_cb int4, titulaire int4) RETURNS varchar(16) AS $$
+CREATE OR REPLACE FUNCTION creer_cb_joint(id_cpt int4, id_type_cb int4, titulaire int4) RETURNS integer AS $$
 DECLARE
 	num_carte varchar(16);
 	nb varchar(11);
 	nb_carte integer;
 BEGIN
-	SELECT NbCompte INTO nb FROM compte WHERE id_compte=id_cpt;
+	SELECT NbCompte INTO nb FROM compte NATURAL JOIN comptes_joints
+	WHERE id_compte=id_cpt AND (compte.ID_titulaire=titulaire OR comptes_joints.id_2eme_personne=titulaire);
 
-	SELECT COUNT(DISTINCT numero_carte) INTO nb_carte
-	FROM carte_bancaire WHERE NbCompte=nb AND id_titulaire=titulaire;
+	SELECT COUNT(*) INTO nb_carte
+	FROM carte_bancaire WHERE (NbCompte=nb AND id_titulaire=titulaire);
 
 	IF nb_carte != 0 THEN num_carte=NULL;
 	ELSE SELECT creer_cb(id_cpt,id_type_cb) INTO num_carte;
 	END IF;
-
-	RETURN nb_carte;
+/*
+	IF EXISTS ( SELECT * FROM carte_bancaire WHERE NbCompte=nb AND id_titulaire=titulaire) THEN num_carte:='0000000000000000';
+	ELSE SELECT creer_cb(id_cpt,id_type_cb) INTO num_carte;
+	END IF;
+*/	RETURN nb_carte;
 END;
 $$ LANGUAGE plpgsql;

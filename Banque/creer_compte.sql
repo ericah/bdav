@@ -1,11 +1,8 @@
 DROP FUNCTION creer_compte_joint(int4,int4,int4,int4,int4,boolean,boolean);
-DROP FUNCTION creer_compte(int4,int4,int4,int4);
-DROP FUNCTION calcul_taux_annuel(int4);
-DROP FUNCTION calcul_decouvert(int4);
-DROP FUNCTION creer_iban(varchar(11),int4,int4);
---DROP FUNCTION creer_cle_rib();
---DROP FUNCTION creer_num_compte();
-
+DROP FUNCTION creer_compte(integer,integer,integer,integer);
+DROP FUNCTION calcul_taux_annuel(character varying,integer);
+DROP FUNCTION calcul_decouvert(character varying,integer);
+DROP FUNCTION creer_iban(varchar(11),integer,integer);
 
 CREATE OR REPLACE FUNCTION creer_num_compte() RETURNS varchar(11) AS $$
 DECLARE
@@ -27,19 +24,16 @@ BEGIN
 	END IF;
 	
 	serie := serie +1;
-	
 	resultat := entete || serie;
 
-	RETURN resultat;
-	
+	RETURN resultat;	
 END;
-
-
 $$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION creer_cle_rib() RETURNS varchar(2) AS $$
 BEGIN
-	RETURN TRUNC(RANDOM() * 99 + 1);
+	RETURN TRUNC(RANDOM() * 89 + 10);
 END;
 $$ LANGUAGE plpgsql;
 
@@ -55,7 +49,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION calcul_decouvert(id_cpt int4) RETURNS boolean AS $$
+CREATE OR REPLACE FUNCTION calcul_decouvert(nb_cpt compte.NbCompte%TYPE, a compte.id_agence%TYPE) RETURNS boolean AS $$
 DECLARE
 	perso int4;
 	decouvert_max int4;
@@ -64,7 +58,7 @@ DECLARE
 	res boolean;
 BEGIN
 	SELECT id_titulaire,decouvert_aut INTO perso, decouvert_actuel
-	FROM compte WHERE id_compte = id_cpt;
+	FROM compte WHERE NbCompte=nb_cpt AND Id_Agence=a;
 
 	SELECT revenues_annuelles INTO revenus
 	FROM personne WHERE id_perso = perso;
@@ -73,7 +67,8 @@ BEGIN
 	res := FALSE;
 
 	IF (decouvert_actuel < decouvert_max) THEN
-	   UPDATE compte SET decouvert_aut=decouvert_max WHERE id_compte=id_cpt;
+	   UPDATE compte SET decouvert_aut=decouvert_max
+	   WHERE NbCompte=nb_cpt AND Id_Agence=a;
 	   res := TRUE;
 	END IF;
 
@@ -81,7 +76,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION calcul_taux_annuel(id_cpt int4) RETURNS float AS $$
+CREATE OR REPLACE FUNCTION calcul_taux_annuel(nb_cpt compte.NbCompte%TYPE, a compte.Id_Agence%TYPE) RETURNS float AS $$
 DECLARE
 	bk int4;
 	cpt int4;
@@ -89,7 +84,8 @@ DECLARE
 	val int4;
 BEGIN
 	SELECT id_banque,type_compte INTO bk,cpt
-	FROM banque NATURAL JOIN compte WHERE id_compte=id_cpt;
+	FROM banque NATURAL JOIN compte
+	WHERE compte.NbCompte=nb_cpt AND compte.Id_Agence=a;
 	
 	info := 'bk' || bk || 'codecpt' || cpt;
 
@@ -108,15 +104,14 @@ DECLARE
 	decouvert boolean;
 	taux float;
 BEGIN
-
 	SELECT creer_num_compte() INTO cpt;
 	SELECT creer_iban(cpt, b,a) INTO iban;
 
 	INSERT INTO compte VALUES (default, cpt,0,0,p,typec,iban,a, false, 0.0);
 	
-	SELECT id_compte INTO id FROM compte WHERE NbCompte = cpt;
-	SELECT calcul_decouvert(id) INTO decouvert;
-	SELECT calcul_taux_annuel(id) INTO taux;
+	SELECT id_compte INTO id FROM compte WHERE NbCompte=cpt AND Id_Agence=a;
+	SELECT calcul_decouvert(cpt,a) INTO decouvert;
+	SELECT calcul_taux_annuel(cpt,a) INTO taux;
 	UPDATE compte SET taux_annuel=taux WHERE id_compte=id;
 
 	RETURN id;
