@@ -42,7 +42,7 @@ INSERT INTO nature_trans VALUES (default, 'cheque');
 INSERT INTO nature_trans VALUES (default, 'retrait');
 INSERT INTO nature_trans VALUES (default, 'virement unitaire');
 INSERT INTO nature_trans VALUES (default, 'virement periodique');
-INSERT INTO nature_trans VALUES (default, 'dépôt d´ espèces');
+INSERT INTO nature_trans VALUES (default, 'dépôt d´espèces');
 
 INSERT INTO periodicite VALUES (default, 'Unitaire',1);
 INSERT INTO periodicite VALUES (default, 'Journalier',1);
@@ -54,7 +54,7 @@ INSERT INTO periodicite VALUES (default, 'Semestriel',180);
 INSERT INTO periodicite VALUES (default, 'Annuel',360);
 
 INSERT INTO parametres VALUES (default,'entetecompte',2014777000);
-INSERT INTO parametres VALUES (default,'Formule_cheque',201401);
+INSERT INTO parametres VALUES (default,'Formule_cheque',2014010);
 
 INSERT INTO parametres VALUES (default,'formule_cb_bk76567',20143849);
 INSERT INTO parametres VALUES (default,'formule_cb_bk12345',20144512);

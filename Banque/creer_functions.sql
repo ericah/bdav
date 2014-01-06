@@ -4,3 +4,4 @@
 \i creer_transaction.sql
 \i consulte.sql
 \i fermer_compte.sql
+\i generer_chequier.sql

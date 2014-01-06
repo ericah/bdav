@@ -134,7 +134,6 @@ CREATE TABLE periodicite (
 
 CREATE TABLE transactions (
   id_trans       int4 NOT NULL, 
-  unitaire       bool NOT NULL, 
   montant        int4 NOT NULL, 
   date_trans  	 TIMESTAMP NOT NULL, 
   date_effect    TIMESTAMP NOT NULL, 

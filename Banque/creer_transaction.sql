@@ -25,7 +25,7 @@ BEGIN
 	
 	var_nbc :=get_Nbcompte (rib); --tiers
 
-	id_tiers:=get_id_tiers (rib);
+	id_tiers:=get_id_tiers (rib); 
 	
 	idc:=get_id_compte (banque , agence ,var_nbc);  --tiers
 
@@ -33,11 +33,20 @@ BEGIN
 									
 	IF flux='O' THEN
 	   
-		IF nat=1 THEN ---prelev
+			IF nat=1 THEN ---prelev
 
+			   	INSERT INTO transactions(id_trans, montant, date_trans, date_effect, flux, periodicite	                                                          TiersId_tiers, nature_trans) 
+				VALUES (default,mont, now,now,flux,period, id_tiers, nat);    
+		     	
+				INSERT INTO debits(id_debit, commentaires, Nbcompte, Nature) 
+			       	VALUES (default, 'retrait espece', mon_nbcompte, nat);
+
+				UPDATE compte
+				SET solde=solde-mont
+ 				WHERE nbcompte=mon_nbcompte;
 
 			ELSEIF nat=3 THEN--retrait
-		     		 INSERT INTO transactions(id_trans, montant, date_trans, date_effect, flux, periodicite, 
+		     		 INSERT INTO transactions(id_trans, montant, date_trans, date_effect, flux, periodicite,
 				 	     		TiersId_tiers, nature_trans) 
 					VALUES (default,mont, now,now,flux,period, null, nat);    
 		     	
