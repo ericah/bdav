@@ -51,7 +51,11 @@ BEGIN
 			ELSEIF nat=4 THEN -- virement uni
 			        INSERT INTO transactions(id_trans, montant, date_trans, date_effect, flux, periodicite, 
 				 	     		TiersId_tiers, nature_trans) 
-					VALUES (default,mont, now,date_eff,flux,period, id_tiers, nat);    
+					VALUES (default,mont, now,date_eff,flux,period, id_tiers, nat);   
+
+				INSERT INTO debits(id_debit, commentaires, Nbcompte, Nature) 
+				       VALUES (default, 'virement unitaire', mon_nbcompte, nat);
+
 
 				UPDATE compte
 				SET solde=solde-mont
@@ -64,7 +68,10 @@ BEGIN
 
 			       INSERT INTO transactions(id_trans, montant, date_trans, date_effect, flux, periodicite, 
 				 	     		TiersId_tiers, nature_trans) 
-					VALUES (default,mont, now,date_eff,flux,period, id_tiers, nat);    
+					VALUES (default,mont, now,date_eff,flux,period, id_tiers, nat); 
+
+				INSERT INTO debits(id_debit, commentaires, Nbcompte, Nature) 
+				       VALUES (default, 'virement unitaire', mon_nbcompte, nat);   
 
 				UPDATE compte
 				SET solde=solde-mont
